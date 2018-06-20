@@ -123,15 +123,11 @@ tasks:
           script: |
             set -e
             cd stitch-js-sdk
-            yarn install
-            npm run build
-            npm run build-web
-            npm run build-web-dev
-            mkdir tmp
-            cd tmp
-            npm pack ../
-            mv mongodb-stitch-*.tgz mongodb-stitch.tgz
-            cd ../../
+            npm install --global lerna
+            npm install
+            lerna bootstrap --hoist
+            lerna run build
+            cd ../
             mkdir test_app
             cd test_app
             npm install --save ../stitch-js-sdk/tmp/mongodb-stitch.tgz
